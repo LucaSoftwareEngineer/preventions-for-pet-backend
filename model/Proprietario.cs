@@ -9,14 +9,14 @@ namespace model
     public class Proprietario
     {
         [Column("pro_id")]
-        private int id { get; set; }
+        public int Id { get; set; }
 
         [Column("pro_nome")]
-        private string nome { get; set; }
+        public string Nome { get; set; }
 
         [Column("pro_cognome")]
-        private string cognome { get; set; }
+        public string Cognome { get; set; }
 
-        private List<Pet> pets { get; set; } = new List<Pet>();
+        public List<Pet> Pets { get; set; } = new List<Pet>();
     }
 }

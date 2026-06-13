@@ -9,19 +9,19 @@ namespace model
     public class Pet
     {
         [Column("pet_id")]
-        private int id { get; set; }
+        public int Id { get; set; }
 
         [Column("pet_nome")]
-        private string nome { get; set; }
+        public string Nome { get; set; }
 
         [Column("pet_eta")]
-        private int eta { get; set; }
+        public int Eta { get; set; }
 
         [Column("pet_data_nascita")]
-        private DateTime dataNascita { get; set; }
+        public DateTime DataNascita { get; set; }
 
         [Column("pet_pro_id")]
-        private int proprietarioId { get; set; }
+        public int ProprietarioId { get; set; }
 
     }
 }
