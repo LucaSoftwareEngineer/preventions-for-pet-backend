@@ -1,4 +1,5 @@
 ﻿using data;
+using Microsoft.EntityFrameworkCore;
 using model;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,14 @@ namespace repository
         }
 
         public List<Pet> FindAll() {
-            return _appDbContext.pets.ToList();
+            return _appDbContext.pets.Include(p => p.Proprietario).ToList();
         }
 
         public Pet? FindById(int id) {
             return _appDbContext.pets.FirstOrDefault(p => p.Id == id);
         }
 
-        public Pet Save(Pet pet) { 
+        public Pet Save(Pet pet) {
             if (pet.Id != 0) {
                 return _appDbContext.pets.Update(pet).Entity;
             } else {

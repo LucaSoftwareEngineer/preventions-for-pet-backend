@@ -18,7 +18,7 @@ namespace repository
 
         public List<Proprietario> FindAll()
         {
-            return _appDbContext.proprietari.ToList();
+            return _appDbContext.proprietari.Include(p => p.Pets).ToList();
         }
 
         public Proprietario? FindById(int id)

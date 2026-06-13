@@ -23,7 +23,7 @@ namespace model
         [Column("pet_pro_id")]
         public int ProprietarioId { get; set; }
 
-        private Proprietario proprietario { get; set; }
+        public virtual Proprietario Proprietario { get; set; } = new Proprietario();
 
     }
 }

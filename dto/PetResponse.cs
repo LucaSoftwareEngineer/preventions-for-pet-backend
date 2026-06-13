@@ -15,6 +15,6 @@ namespace dto
 
         public DateTime DataNascita { get; set; }
 
-        private ProprietarioResponse proprietario { get; set; }
+        public ProprietarioNoPetsResponse Proprietario { get; set; }
     }
 }

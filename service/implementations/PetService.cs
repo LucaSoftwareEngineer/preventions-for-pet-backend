@@ -19,9 +19,29 @@ namespace service.implementations
             _proprietarioRepository = proprietarioRepository;
         }
 
+        public Task<List<PetResponse>> FindAll()
+        {
+            List<PetResponse> petResponses = new List<PetResponse>();
+            petResponses = _petRepository.FindAll().Select(pet => new PetResponse
+                {
+                    Id = pet.Id,
+                    Nome = pet.Nome,
+                    Eta = pet.Eta,
+                    DataNascita = pet.DataNascita,
+                    Proprietario = new ProprietarioNoPetsResponse
+                    {
+                        Id = pet.ProprietarioId,
+                        Nome = pet.Proprietario.Nome,
+                        Cognome = pet.Proprietario.Cognome
+                    }
+                }).ToList();
+
+            return Task.FromResult(petResponses);
+        }
+
         public Task<List<PetFindAllByProprietarioResponse>> FindAllByProprietario(int idProprietario)
         {
-            Proprietario? proprietario = _proprietarioRepository.findById(idProprietario);
+            Proprietario? proprietario = _proprietarioRepository.FindById(idProprietario);
             List<PetFindAllByProprietarioResponse> petResponses = new List<PetFindAllByProprietarioResponse>();
 
             if (proprietario == null) throw new Exception("Proprietario non trovato");
