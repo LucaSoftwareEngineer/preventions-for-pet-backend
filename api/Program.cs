@@ -6,6 +6,10 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+var DB_CONN_KEY = builder.Configuration.GetConnectionString("Default");
+var DB_CONN_VAL = Environment.GetEnvironmentVariable("DB_CONN");
+var DB_CONN = DB_CONN_KEY?.Replace("${DB_CONN}", DB_CONN_VAL);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

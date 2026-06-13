@@ -7,7 +7,8 @@
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5273",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_CONN": "Server=localhost\\SQLEXPRESS;Database=DEV_PREVENTIONS_FOR_PET;User Id=sa;Password=admin;Trusted_Connection=True;TrustServerCertificate=True;"
       }
     },
     "https": {
@@ -16,7 +17,8 @@
       "launchBrowser": false,
       "applicationUrl": "https://localhost:7269;http://localhost:5273",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_CONN": "Server=localhost\\SQLEXPRESS;Database=DEV_PREVENTIONS_FOR_PET;User Id=sa;Password=admin;Trusted_Connection=True;TrustServerCertificate=True;"
       }
     }
   }
