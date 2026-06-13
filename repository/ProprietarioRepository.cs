@@ -1,4 +1,5 @@
 ﻿using data;
+using Microsoft.EntityFrameworkCore;
 using model;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace repository
 
         public Proprietario? findById(int id)
         {
-            return _appDbContext.proprietari.FirstOrDefault(p => p.Id == id);
+            return _appDbContext.proprietari.Include(p => p.Pets).FirstOrDefault(p => p.Id == id);
         }
 
         public Proprietario save(Proprietario proprietario)

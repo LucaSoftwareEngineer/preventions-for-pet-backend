@@ -6,7 +6,7 @@ using System.Text;
 
 namespace service.interfaces
 {
-    interface IPetService
+    public interface IPetService
     {
         public Task<List<PetFindAllByProprietarioResponse>> FindAllByProprietario(int idProprietario);
     }

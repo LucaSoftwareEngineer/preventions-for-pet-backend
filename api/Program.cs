@@ -17,8 +17,8 @@ var DB_CONN_VAL = Environment.GetEnvironmentVariable("DB_CONN");
 var DB_CONN = DB_CONN_KEY?.Replace("${DB_CONN}", DB_CONN_VAL);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(DB_CONN));
-builder.Services.AddSingleton<PetRepository>();
-builder.Services.AddSingleton<ProprietarioRepository>();
+builder.Services.AddScoped<PetRepository>();
+builder.Services.AddScoped<ProprietarioRepository>();
 builder.Services.AddScoped<IPetService, PetService>();
 
 var app = builder.Build();
