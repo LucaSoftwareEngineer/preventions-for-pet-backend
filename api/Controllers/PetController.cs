@@ -43,5 +43,19 @@ namespace api.Controllers
             }
         }
 
+        [HttpGet("{idPet:int}")]
+        public async Task<IActionResult> FindById([FromRoute] int idPet)
+        {
+            try
+            {
+                var pet = await _petService.FindById(idPet);
+                return Ok(pet);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
