@@ -16,17 +16,17 @@ namespace repository
             _appDbContext = appDbContext;
         }
 
-        public List<Proprietario> findAll()
+        public List<Proprietario> FindAll()
         {
             return _appDbContext.proprietari.ToList();
         }
 
-        public Proprietario? findById(int id)
+        public Proprietario? FindById(int id)
         {
             return _appDbContext.proprietari.Include(p => p.Pets).FirstOrDefault(p => p.Id == id);
         }
 
-        public Proprietario save(Proprietario proprietario)
+        public Proprietario Save(Proprietario proprietario)
         {
             if (proprietario.Id != 0)
             {
@@ -38,9 +38,9 @@ namespace repository
             }
         }
 
-        public void deleteById(int id)
+        public void DeleteById(int id)
         {
-            Proprietario? proprietario = findById(id);
+            Proprietario? proprietario = FindById(id);
             if (proprietario != null)
             {
                 _appDbContext.proprietari.Remove(proprietario);

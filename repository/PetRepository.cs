@@ -15,15 +15,15 @@ namespace repository
             _appDbContext = appDbContext;
         }
 
-        public List<Pet> findAll() {
+        public List<Pet> FindAll() {
             return _appDbContext.pets.ToList();
         }
 
-        public Pet? findById(int id) {
+        public Pet? FindById(int id) {
             return _appDbContext.pets.FirstOrDefault(p => p.Id == id);
         }
 
-        public Pet save(Pet pet) { 
+        public Pet Save(Pet pet) { 
             if (pet.Id != 0) {
                 return _appDbContext.pets.Update(pet).Entity;
             } else {
@@ -31,8 +31,8 @@ namespace repository
             }
         }
 
-        public void deleteById(int id) {
-            Pet? pet = findById(id);
+        public void DeleteById(int id) {
+            Pet? pet = FindById(id);
             if (pet != null) {
                 _appDbContext.pets.Remove(pet);
             }
