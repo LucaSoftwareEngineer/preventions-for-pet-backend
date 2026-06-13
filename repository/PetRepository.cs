@@ -21,7 +21,7 @@ namespace repository
         }
 
         public Pet? FindById(int id) {
-            return _appDbContext.pets.FirstOrDefault(p => p.Id == id);
+            return _appDbContext.pets.Include(p => p.Proprietario).FirstOrDefault(p => p.Id == id);
         }
 
         public Pet Save(Pet pet) {

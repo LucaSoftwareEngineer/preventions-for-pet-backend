@@ -56,5 +56,26 @@ namespace service.implementations
 
             return Task.FromResult(petResponses);
         }
+
+        public Task<PetResponse> FindById(int id)
+        {
+            Pet? pet = _petRepository.FindById(id);
+
+            if (pet == null) throw new Exception("Pet non trovato");
+
+            return Task.FromResult(new PetResponse
+            {
+                Id = pet.Id,
+                Nome = pet.Nome,
+                Eta = pet.Eta,
+                DataNascita = pet.DataNascita,
+                Proprietario = new ProprietarioNoPetsResponse
+                {
+                    Id = pet.ProprietarioId,
+                    Nome = pet.Proprietario.Nome,
+                    Cognome = pet.Proprietario.Cognome
+                }
+            });
+        }
     }
 }
