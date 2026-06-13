@@ -1,6 +1,26 @@
 @api_HostAddress = http://localhost:5273
 
-GET {{api_HostAddress}}/weatherforecast/
+GET {{api_HostAddress}}/pet/list/{idProprietario}
+Accept: application/json
+
+###
+
+GET {{api_HostAddress}}/pet/list
+Accept: application/json
+
+###
+
+POST {{api_HostAddress}}/pet/add
+Accept: application/json
+
+###
+
+PUT {{api_HostAddress}}/pet/update
+Accept: application/json
+
+###
+
+DELETE {{api_HostAddress}}/pet/{idPet}
 Accept: application/json
 
 ###
