@@ -15,6 +15,20 @@ namespace api.Controllers
             _petService = petService;
         }
 
+        [HttpGet("list")]
+        public async Task<IActionResult> FindAll()
+        {
+            try
+            {
+                var pets = await _petService.FindAll();
+                return Ok(pets);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("list/{idProprietario:int}")]
         public async Task<IActionResult> FindAllByProprietario([FromRoute] int idProprietario)
         {
