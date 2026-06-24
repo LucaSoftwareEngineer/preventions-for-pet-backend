@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using dto;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using service.interfaces;
 
@@ -49,6 +50,19 @@ namespace api.Controllers
             try
             {
                 var pet = await _petService.FindById(idPet);
+                return Ok(pet);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> Add([FromBody] PetAddRequest request) {
+            try
+            {
+                var pet = await _petService.Add(request);
                 return Ok(pet);
             }
             catch (Exception ex)

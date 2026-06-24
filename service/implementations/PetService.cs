@@ -4,6 +4,7 @@ using repository;
 using service.interfaces;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace service.implementations
@@ -66,6 +67,63 @@ namespace service.implementations
             return Task.FromResult(new PetResponse
             {
                 Id = pet.Id,
+                Nome = pet.Nome,
+                Eta = pet.Eta,
+                DataNascita = pet.DataNascita,
+                Proprietario = new ProprietarioNoPetsResponse
+                {
+                    Id = pet.ProprietarioId,
+                    Nome = pet.Proprietario.Nome,
+                    Cognome = pet.Proprietario.Cognome
+                }
+            });
+        }
+
+        public Task<PetResponse> Add(PetAddRequest petRequest)
+        {
+            var Proprietario = _proprietarioRepository.FindById(petRequest.IdProprietario);
+
+            if (Proprietario == null) throw new Exception("Proprietario non trovato");
+
+            Pet pet = new Pet
+            {
+                Id = 0,
+                Nome = petRequest.Nome,
+                Eta = petRequest.Eta,
+                DataNascita = petRequest.DataNascita,
+                ProprietarioId = petRequest.IdProprietario,
+                Proprietario = Proprietario
+            };
+
+            return Task.FromResult(new PetResponse
+            {
+                Id = _petRepository.Save(pet).Id,
+                Nome = pet.Nome,
+                Eta = pet.Eta,
+                DataNascita = pet.DataNascita,
+                Proprietario = new ProprietarioNoPetsResponse
+                {
+                    Id = petRequest.IdProprietario,
+                    Nome = Proprietario.Nome,
+                    Cognome = Proprietario.Cognome
+                }
+            });
+        }
+
+        public Task<PetResponse> Update(PetUpdateRequest petRequest)
+        {
+            Pet pet = new Pet
+            {
+                Id = petRequest.Id,
+                Nome = petRequest.Nome,
+                Eta = petRequest.Eta,
+                DataNascita = petRequest.DataNascita,
+                ProprietarioId = petRequest.IdProprietario
+            };
+
+            return Task.FromResult(new PetResponse
+            {
+                Id = _petRepository.Save(pet).Id,
                 Nome = pet.Nome,
                 Eta = pet.Eta,
                 DataNascita = pet.DataNascita,

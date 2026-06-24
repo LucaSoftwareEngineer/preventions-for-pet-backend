@@ -26,10 +26,12 @@ namespace repository
 
         public Pet Save(Pet pet) {
             if (pet.Id != 0) {
-                return _appDbContext.pets.Update(pet).Entity;
+                pet = _appDbContext.pets.Update(pet).Entity;
             } else {
-                return _appDbContext.pets.Add(pet).Entity;
+                pet = _appDbContext.pets.Add(pet).Entity;
             }
+            _appDbContext.SaveChanges();
+            return pet;
         }
 
         public void DeleteById(int id) {
