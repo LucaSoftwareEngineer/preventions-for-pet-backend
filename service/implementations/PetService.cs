@@ -142,5 +142,22 @@ namespace service.implementations
                 }
             });
         }
+
+        public Task<MessageResponse> Delete(int id)
+        {
+            var pet = _petRepository.FindById(id);
+
+            if (pet == null) throw new Exception("Pet non trovato");
+
+            try
+            {
+                _petRepository.DeleteById(id);
+                return Task.FromResult(new MessageResponse { Message = "Pet con id " + id + " eliminato con successo" });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Errore durante l'eliminazione del pet: " + ex.Message);
+            }
+        }
     }
 }

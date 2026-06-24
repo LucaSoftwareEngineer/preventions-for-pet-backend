@@ -85,5 +85,19 @@ namespace api.Controllers
             }
         }
 
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete([FromQuery] int id)
+        {
+            try
+            {
+                var msg = await _petService.Delete(id);
+                return Ok(msg);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

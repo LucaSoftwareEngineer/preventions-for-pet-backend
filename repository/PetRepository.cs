@@ -38,6 +38,7 @@ namespace repository
             Pet? pet = FindById(id);
             if (pet != null) {
                 _appDbContext.pets.Remove(pet);
+                _appDbContext.SaveChanges();
             }
         }
     }
