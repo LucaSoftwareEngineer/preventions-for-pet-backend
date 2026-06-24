@@ -112,26 +112,33 @@ namespace service.implementations
 
         public Task<PetResponse> Update(PetUpdateRequest petRequest)
         {
-            Pet pet = new Pet
+
+            var Pet = _petRepository.FindById(petRequest.Id);
+            if (Pet == null) throw new Exception("Pet non trovato");
+
+            Pet.Id = petRequest.Id;
+
+            if (petRequest.Nome != null) Pet.Nome = petRequest.Nome;
+            if (petRequest.Eta != 0) Pet.Eta = petRequest.Eta;
+            if (petRequest.DataNascita != DateTime.MinValue) Pet.DataNascita = petRequest.DataNascita;
+            if (petRequest.IdProprietario != 0)
             {
-                Id = petRequest.Id,
-                Nome = petRequest.Nome,
-                Eta = petRequest.Eta,
-                DataNascita = petRequest.DataNascita,
-                ProprietarioId = petRequest.IdProprietario
-            };
+                Pet.ProprietarioId = petRequest.IdProprietario;
+                var Proprietario = _proprietarioRepository.FindById(petRequest.IdProprietario);
+                if (Proprietario == null) throw new Exception("Proprietario non trovato");
+            }
 
             return Task.FromResult(new PetResponse
             {
-                Id = _petRepository.Save(pet).Id,
-                Nome = pet.Nome,
-                Eta = pet.Eta,
-                DataNascita = pet.DataNascita,
+                Id = _petRepository.Save(Pet).Id,
+                Nome = Pet.Nome,
+                Eta = Pet.Eta,
+                DataNascita = Pet.DataNascita,
                 Proprietario = new ProprietarioNoPetsResponse
                 {
-                    Id = pet.ProprietarioId,
-                    Nome = pet.Proprietario.Nome,
-                    Cognome = pet.Proprietario.Cognome
+                    Id = Pet.ProprietarioId,
+                    Nome = Pet.Proprietario.Nome,
+                    Cognome = Pet.Proprietario.Cognome
                 }
             });
         }

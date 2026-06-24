@@ -71,5 +71,19 @@ namespace api.Controllers
             }
         }
 
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] PetUpdateRequest request)
+        {
+            try
+            {
+                var pet = await _petService.Update(request);
+                return Ok(pet);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
